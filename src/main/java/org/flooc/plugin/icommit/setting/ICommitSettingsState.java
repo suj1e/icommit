@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
  * @author sujie
  * @since 1.0.0
  */
-@State(name = "org.flooc.plugin.icommit.settings.ICommitSettingsState", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
+@State(name = "org.flooc.plugin.icommit.setting.ICommitSettingsState", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
 @Service
 public final class ICommitSettingsState implements PersistentStateComponent<ICommitSettingsState> {
 
