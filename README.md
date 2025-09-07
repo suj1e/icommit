@@ -5,11 +5,11 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/icommit.svg)](https://plugins.jetbrains.com/plugin/icommit)
 
 <!-- Plugin description -->
-ICommit 是一个基于 AI 模型的代码提交工具，它可以根据代码变更自动生成符合规范的提交信息。
+It is an AI-based code submission tool that automatically generates compliant submissions based on code changes.
 
-## 功能
-- 支持自定义promptTemplate
-- 支持自定义ai模型
+## Features
+- Support customization of promptTemplate
+- Support customization of ai model
 
 <!-- Plugin description end -->
 
