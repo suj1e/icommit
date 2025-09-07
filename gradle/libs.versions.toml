@@ -9,10 +9,14 @@ intelliJPlatform = "2.7.2"
 kotlin = "2.2.0"
 kover = "0.9.1"
 qodana = "2025.1.1"
+volc="0.2.30"
+okhttp="5.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 opentest4j = { group = "org.opentest4j", name = "opentest4j", version.ref = "opentest4j" }
+volc = { group = "com.volcengine", name = "volcengine-java-sdk-ark-runtime", version.ref = "volc" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
