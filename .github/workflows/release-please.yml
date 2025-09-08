@@ -12,6 +12,9 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许修改仓库内容（关键）
+      pull-requests: write  # 允许创建PR（如果使用PR模式）
     steps:
       - uses: googleapis/release-please-action@v4
         with:
