@@ -8,7 +8,11 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# 去除版本号可能带有的v前缀（release-please生成的tag通常带v前缀）
 new_version=$1
+if [[ $new_version == v* ]]; then
+    new_version=${new_version:1}
+fi
 
 # 检查版本号是否符合语义化版本格式（简单检查）
 if ! [[ $new_version =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$ ]]; then
