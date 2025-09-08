@@ -18,6 +18,5 @@ jobs:
           # `MY_RELEASE_PLEASE_TOKEN` (this secret name is not important).
           # token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          # this is a built-in strategy in release-please, see "Action Inputs"
-          # for more options
-          release-type: simple
+          # 使用manifest文件中的配置，不再在此处指定release-type
+          # 具体配置请查看项目根目录下的.release-please-manifest.json文件
