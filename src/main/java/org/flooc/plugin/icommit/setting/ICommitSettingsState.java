@@ -5,7 +5,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
  * @author sujie
  * @since 1.0.0
  */
-@State(name = "org.flooc.plugin.icommit.setting.ICommitSettingsState", storages = @Storage(StoragePathMacros.WORKSPACE_FILE))
+@State(name = "org.flooc.plugin.icommit.setting.ICommitSettingsState", storages = @Storage("icommit-settings.xml"))
 @Service
 public final class ICommitSettingsState implements PersistentStateComponent<ICommitSettingsState> {
 

@@ -47,28 +47,26 @@ public class GenMessageAction extends AnAction {
       return;
     }
     ProgressManager.getInstance().run(new Task.Backgroundable(actionEvent.getProject(),
-        "Generating commit message") {
+        "Generating commit message", true) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
+        indicator.setFraction(0.3);
         String commitMessage;
-        indicator.setFraction(0.1);
         try {
-          commitMessage = aiService.generateCommitMessage(prompt, indicator);
+          commitMessage = aiService.generateCommitMessage(prompt);
         } catch (Exception e) {
           ICommitNotifications.notify("Generate commit message exception", MessageType.ERROR);
           return;
         }
+        indicator.setFraction(0.8);
         if (commitMessage == null || commitMessage.isEmpty()) {
           ICommitNotifications.notify("Failed to generate commit message", MessageType.ERROR);
           return;
         }
-        indicator.setFraction(0.9);
+        indicator.setFraction(1);
         ICommitNotifications.notify("Commit message generated", MessageType.INFO);
-        ApplicationManager.getApplication().invokeLater(() -> {
-          commitMessageI.setCommitMessage(commitMessage);
-        });
-        indicator.setFraction(1.0);
-        indicator.setText("Finished");
+        ApplicationManager.getApplication()
+            .invokeLater(() -> commitMessageI.setCommitMessage(commitMessage));
       }
     });
   }

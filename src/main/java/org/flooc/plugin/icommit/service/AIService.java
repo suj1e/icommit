@@ -1,7 +1,5 @@
 package org.flooc.plugin.icommit.service;
 
-import com.intellij.openapi.progress.ProgressIndicator;
-
 /**
  * Interface for AI services to generate commit messages
  */
@@ -16,7 +14,7 @@ public interface AIService {
    * @return Generated commit message
    * @throws Exception If there's an error during generation
    */
-  String generateCommitMessage(String prompt, ProgressIndicator indicator) throws Exception;
+  String generateCommitMessage(String prompt) throws Exception;
 
 
 }

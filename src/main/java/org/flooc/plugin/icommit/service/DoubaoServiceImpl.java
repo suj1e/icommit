@@ -1,6 +1,5 @@
 package org.flooc.plugin.icommit.service;
 
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.ui.MessageType;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionContentPart;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest;
@@ -27,7 +26,7 @@ public class DoubaoServiceImpl implements AIService {
   private static final Dispatcher dispatcher = new Dispatcher();
 
   @Override
-  public String generateCommitMessage(String prompt, ProgressIndicator indicator) throws Exception {
+  public String generateCommitMessage(String prompt) throws Exception {
     String apiKey = ICommitSettingsState.getInstance().apiKey;
     String apiUrl = ICommitSettingsState.getInstance().apiUrl;
     String model = ICommitSettingsState.getInstance().model;
@@ -50,20 +49,17 @@ public class DoubaoServiceImpl implements AIService {
     final ChatMessage userMessage = ChatMessage.builder().role(ChatMessageRole.USER)
         .multiContent(multiParts).build();
     messages.add(userMessage);
-    indicator.setFraction(0.3);
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
         // 指定您创建的方舟推理接入点 ID，此处已帮您修改为您的推理接入点 ID
         .model(model)
         .messages(messages)
         .build();
-    indicator.setFraction(0.6);
     // Send request
     StringBuilder sb = new StringBuilder();
     service.createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
       sb.append(choice.getMessage().getContent());
     });
     service.shutdownExecutor();
-    indicator.setFraction(0.8);
     return sb.toString();
   }
 

@@ -1,6 +1,5 @@
 package org.flooc.plugin.icommit.service;
 
-import com.intellij.openapi.progress.ProgressIndicator;
 import java.util.HashMap;
 import java.util.Map;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
@@ -18,13 +17,13 @@ public class AIServiceExecutor implements AIService {
   }
 
   @Override
-  public String generateCommitMessage(String prompt, ProgressIndicator indicator) throws Exception {
+  public String generateCommitMessage(String prompt) throws Exception {
     String serviceType = ICommitSettingsState.getInstance().serviceType;
     if (serviceType == null || serviceType.trim().isEmpty()
         || AI_SERVICES.get(serviceType) == null) {
       return AI_SERVICES.get(AIService.DOUBAO_SERVICE_TYPE)
-          .generateCommitMessage(prompt, indicator);
+          .generateCommitMessage(prompt);
     }
-    return AI_SERVICES.get(serviceType).generateCommitMessage(prompt, indicator);
+    return AI_SERVICES.get(serviceType).generateCommitMessage(prompt);
   }
 }
