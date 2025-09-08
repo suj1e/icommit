@@ -2,7 +2,6 @@
 <idea-plugin>
   <id>org.flooc.plugin.icommit</id>
   <name>ICommit</name>
-  <version>1.0.0</version>
   <vendor>Flooc</vendor>
 
   <depends>com.intellij.modules.platform</depends>
