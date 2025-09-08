@@ -1,0 +1,13 @@
+{
+  ".": {
+    "release-type": "java",
+    "package-name": "icommit",
+    "version-file": [
+      "version.txt",
+      "gradle.properties"
+    ],
+    "version-path": {
+      "gradle.properties": "pluginVersion"
+    }
+  }
+}
