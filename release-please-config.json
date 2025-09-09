@@ -4,6 +4,7 @@
     ".": {
       "release-type": "java",
       "package-name": "icommit",
+      "extra-files": ["gradle.properties"],
       "changelog-type": "conventional",
       "include-component-in-tag": false,
       "bump-minor-pre-major": false,
