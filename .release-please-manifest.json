@@ -1,16 +1,9 @@
 {
   ".": {
-    "release-type": "java",
+    "release-type": "simple",
     "package-name": "icommit",
-    "version-file": "version.txt",
     "extra-files": [
       "gradle.properties"
-    ],
-    "extra-files-version-transform": {
-      "gradle.properties": {
-        "type": "text/x-properties",
-        "path": "pluginVersion"
-      }
-    }
+    ]
   }
 }
