@@ -1,6 +1,6 @@
 {
   ".": {
-    "release-type": "java",
+    "release-type": "simple",
     "package-name": "icommit",
     "extra-files": [
       "gradle.properties"
