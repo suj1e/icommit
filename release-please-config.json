@@ -6,7 +6,7 @@
       "package-name": "icommit",
       "extra-files": ["gradle.properties"],
       "extra-files-regex": [
-         "s/pluginVersion=.*/pluginVersion={{version}}/g"
+         "s/pluginVersion = .*/pluginVersion={{version}}/g"
       ],
       "changelog-type": "conventional",
       "include-component-in-tag": false,
