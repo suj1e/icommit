@@ -1,9 +1,12 @@
 {
   ".": {
-    "release-type": "simple",
+    "release-type": "java",
     "package-name": "icommit",
     "extra-files": [
       "gradle.properties"
+    ],
+    "extra-files-regex": [
+      "s/pluginVersion=.*/pluginVersion={{version}}/g"
     ]
   }
 }
