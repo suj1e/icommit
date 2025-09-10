@@ -20,6 +20,7 @@ public final class ICommitSettingsState implements PersistentStateComponent<ICom
   public String apiKey;
   public String apiUrl;
   public String serviceType;
+  public String deepThinking;
   public String promptTips;
   public String model;
 

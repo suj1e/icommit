@@ -3,7 +3,6 @@ package org.flooc.plugin.icommit.service.volc;
 import com.intellij.openapi.ui.MessageType;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionContentPart;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest;
-import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest.ChatCompletionRequestStreamOptions;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest.ChatCompletionRequestThinking;
 import com.volcengine.ark.runtime.model.completion.chat.ChatMessage;
 import com.volcengine.ark.runtime.model.completion.chat.ChatMessageRole;
@@ -36,6 +35,7 @@ public class VolcServiceImpl implements AIService {
     String apiKey = ICommitSettingsState.getInstance().apiKey;
     String apiUrl = ICommitSettingsState.getInstance().apiUrl;
     String model = ICommitSettingsState.getInstance().model;
+    String deepThinking = ICommitSettingsState.getInstance().deepThinking;
     if (apiKey == null || apiKey.isEmpty()) {
       ICommitNotifications.notify("API key is empty", MessageType.ERROR);
       return null;
@@ -56,34 +56,18 @@ public class VolcServiceImpl implements AIService {
         .multiContent(multiParts).build();
     messages.add(userMessage);
 
-    ChatCompletionRequestStreamOptions streamOptionsForReq =
-        new ChatCompletionRequestStreamOptions(false);
-    ChatCompletionRequestThinking thinkingForReq = new ChatCompletionRequestThinking(
-        VolcThinkingType.DISABLED.getValue());
-    boolean stream = true;
+    ChatCompletionRequestThinking thinkingForReq = new ChatCompletionRequestThinking(deepThinking);
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
         .model(model)
         .messages(messages)
-        .stream(stream)
-        .streamOptions(streamOptionsForReq)
+        .stream(false)
         .thinking(thinkingForReq)
         .build();
     // Send request
     StringBuilder sb = new StringBuilder();
-    if (!stream) {
-      service.createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
-        sb.append(choice.getMessage().getContent());
-      });
-    } else {
-      service.streamChatCompletion(chatCompletionRequest)
-          .doOnError(Throwable::printStackTrace)
-          .blockingForEach(
-              choice -> {
-                if (!choice.getChoices().isEmpty()) {
-                  sb.append(choice.getChoices().getFirst().getMessage().getContent());
-                }
-              });
-    }
+    service.createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
+      sb.append(choice.getMessage().getContent());
+    });
     service.shutdownExecutor();
     return sb.toString();
   }

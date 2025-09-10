@@ -14,7 +14,7 @@ public class AIServiceExecutor implements AIService {
   private static final Map<String, AIService> AI_SERVICES = new HashMap<>();
 
   static {
-    AI_SERVICES.put(AIService.VOLC_SERVICE_TYPE, new VolcServiceImpl());
+    AI_SERVICES.put(ServiceType.VOLC.getValue(), new VolcServiceImpl());
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AIServiceExecutor implements AIService {
     String serviceType = ICommitSettingsState.getInstance().serviceType;
     if (serviceType == null || serviceType.trim().isEmpty()
         || AI_SERVICES.get(serviceType) == null) {
-      return AI_SERVICES.get(AIService.VOLC_SERVICE_TYPE)
+      return AI_SERVICES.get(ServiceType.VOLC.getValue())
           .generateCommitMessage(prompt);
     }
     return AI_SERVICES.get(serviceType).generateCommitMessage(prompt);

@@ -17,6 +17,7 @@ public class ICommitSettingsComponent {
   private JTextField model;
   private JTextPane promptTips;
   private JComboBox<String> serviceType;
+  private JComboBox<String> deepThinking;
 
   public JPanel getContentPanel() {
     return contentPanel;
@@ -40,6 +41,10 @@ public class ICommitSettingsComponent {
 
   public JTextField getModel() {
     return model;
+  }
+
+  public JComboBox<String> getDeepThinking() {
+    return deepThinking;
   }
 
 }

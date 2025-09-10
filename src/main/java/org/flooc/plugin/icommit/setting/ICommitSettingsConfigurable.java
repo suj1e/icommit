@@ -3,10 +3,12 @@ package org.flooc.plugin.icommit.setting;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts.ConfigurableName;
+import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
-import org.flooc.plugin.icommit.service.AIService;
+import org.flooc.plugin.icommit.service.ServiceType;
+import org.flooc.plugin.icommit.service.volc.VolcDeepThinking;
 import org.flooc.plugin.icommit.service.volc.VolcServiceImpl;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +47,8 @@ public class ICommitSettingsConfigurable implements Configurable {
         !component.getApiUrl().getText().equals(state.apiUrl) ||
         !String.valueOf(component.getServiceType().getSelectedItem()).equals(state.serviceType) ||
         !component.getPromptTips().getText().equals(state.promptTips) ||
-        !component.getModel().getText().equals(state.model);
+        !component.getModel().getText().equals(state.model) ||
+        !String.valueOf(component.getDeepThinking().getSelectedItem()).equals(state.deepThinking);
   }
 
   @Override
@@ -56,6 +59,7 @@ public class ICommitSettingsConfigurable implements Configurable {
     state.serviceType = String.valueOf(component.getServiceType().getSelectedItem());
     state.promptTips = component.getPromptTips().getText();
     state.model = component.getModel().getText();
+    state.deepThinking = String.valueOf(component.getDeepThinking().getSelectedItem());
   }
 
   @Override
@@ -63,9 +67,11 @@ public class ICommitSettingsConfigurable implements Configurable {
     ICommitSettingsState state = ICommitSettingsState.getInstance();
     component.getApiKey().setText(state.apiKey);
     // 其他值初始化给默认值
-    String[] items = new String[]{AIService.VOLC_SERVICE_TYPE};
-    component.getServiceType().setModel(new DefaultComboBoxModel<>(items));
-    component.getServiceType().setSelectedItem(AIService.VOLC_SERVICE_TYPE);
+    String[] serviceTypeItems = new String[]{ServiceType.VOLC.getValue()};
+    component.getServiceType().setModel(new DefaultComboBoxModel<>(serviceTypeItems));
+    component.getDeepThinking()
+        .setModel(new DefaultComboBoxModel<>(Arrays.stream(VolcDeepThinking.values()).map(
+            VolcDeepThinking::getValue).toArray(String[]::new)));
     component.getApiUrl().setText(VolcServiceImpl.DEFAULT_URL);
     component.getModel().setText(VolcServiceImpl.DEFAULT_MODEL);
     component.getPromptTips().setText(PromptConstant.DEFAULT_PROMPT_TIPS);
