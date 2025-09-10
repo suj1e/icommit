@@ -230,7 +230,7 @@ jobs:
 
       # 下载之前上传的构建构件
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: ICommit-${{ needs.release-please.outputs.tag_name }}
           path: ./build/distributions
