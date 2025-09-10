@@ -1,64 +1,71 @@
-# GitHub Actions Workflow is created for testing and preparing the plugin release in the following steps:
-# - Validate Gradle Wrapper.
-# - Run 'test' and 'verifyPlugin' tasks.
-# - Run Qodana inspections.
-# - Run the 'buildPlugin' task and prepare artifact for further tests.
-# - Run the 'runPluginVerifier' task.
-# - Create a draft release.
-#
-# The workflow is triggered on push and pull_request events.
-#
-# GitHub Actions reference: https://help.github.com/en/actions
-#
-## JBIJPPTPL
+# 整合release-please和build工作流的完整CI/CD流程
+# - 自动版本管理
+# - 构建、测试、代码检查
+# - 插件验证
+# - 自动发布
 
-name: Build
+name: Release and Build
+
 on:
-  # Trigger the workflow on pushes to only the 'main' branch (this avoids duplicate checks being run e.g., for dependabot pull requests)
   push:
-    branches: [ main ]
-  # Trigger the workflow on any pull request
+    branches:
+      - main
   pull_request:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
-  
-jobs:
 
-  # Prepare the environment and build the plugin
+jobs:
+  # 阶段1: 版本管理 - 仅在main分支推送时运行
+  release-please:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+      tag_name: ${{ steps.release-please.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release-please
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 使用项目根目录的release-please-config.json配置
+
+  # 阶段2: 构建与测试 - 所有事件都运行
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
-      # Free GitHub Actions Environment Disk Space
+      # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           tool-cache: false
           large-packages: false
 
-      # Check out the current repository
+      # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
 
-      # Set up the Java environment for the next steps
+      # 设置Java环境
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: 21
 
-      # Setup Gradle
+      # 设置Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # Build plugin
+      # 构建插件
       - name: Build plugin
         run: ./gradlew buildPlugin
 
-      # Prepare plugin archive content for creating artifact
+      # 准备插件存档内容以创建构件
       - name: Prepare Plugin Artifact
         id: artifact
         shell: bash
@@ -69,49 +76,48 @@ jobs:
 
           echo "filename=${FILENAME:0:-4}" >> $GITHUB_OUTPUT
 
-      # Store an already-built plugin as an artifact for downloading
+      # 存储已构建的插件作为可下载的构件
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.artifact.outputs.filename }}
           path: ./build/distributions/content/*/*
 
-  # Run tests and upload a code coverage report
+  # 运行测试并上传代码覆盖率报告
   test:
     name: Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-
-      # Free GitHub Actions Environment Disk Space
+      # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           tool-cache: false
           large-packages: false
 
-      # Check out the current repository
+      # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
 
-      # Set up the Java environment for the next steps
+      # 设置Java环境
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: 21
 
-      # Setup Gradle
+      # 设置Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
-      # Run tests
+      # 运行测试
       - name: Run Tests
         run: ./gradlew check
 
-      # Collect Tests Result of failed tests
+      # 收集失败测试的结果
       - name: Collect Tests Result
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
@@ -119,14 +125,7 @@ jobs:
           name: tests-result
           path: ${{ github.workspace }}/build/reports/tests
 
-      # Upload the Kover report to CodeCov
-#      - name: Upload Code Coverage Report
-#        uses: codecov/codecov-action@v5
-#        with:
-#          files: ${{ github.workspace }}/build/reports/kover/report.xml
-#          token: ${{ secrets.CODECOV_TOKEN }}
-
-  # Run Qodana inspections and provide a report
+  # 运行Qodana代码检查并提供报告
   inspectCode:
     name: Inspect code
     needs: [ build ]
@@ -136,70 +135,68 @@ jobs:
       checks: write
       pull-requests: write
     steps:
-
-      # Free GitHub Actions Environment Disk Space
+      # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           tool-cache: false
           large-packages: false
 
-      # Check out the current repository
+      # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
-          fetch-depth: 0  # a full history is required for pull request analysis
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}  
+          fetch-depth: 0  # 代码检查需要完整的历史记录
 
-      # Set up the Java environment for the next steps
+      # 设置Java环境
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: 21
 
-      # Run Qodana inspections
+      # 运行Qodana代码检查
       - name: Qodana - Code Inspection
         uses: JetBrains/qodana-action@v2025.2.1
         with:
           cache-default-branch-only: true
 
-  # Run plugin structure verification along with IntelliJ Plugin Verifier
+  # 运行插件结构验证和IntelliJ插件验证器
   verify:
     name: Verify plugin
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-
-      # Free GitHub Actions Environment Disk Space
+      # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           tool-cache: false
           large-packages: false
 
-      # Check out the current repository
+      # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
 
-      # Set up the Java environment for the next steps
+      # 设置Java环境
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: 21
 
-      # Setup Gradle
+      # 设置Gradle
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
-      # Run Verify Plugin task and IntelliJ Plugin Verifier tool
+      # 运行插件验证任务和IntelliJ插件验证器工具
       - name: Run Plugin Verification tasks
         run: ./gradlew verifyPlugin
 
-      # Collect Plugin Verifier Result
+      # 收集插件验证器结果
       - name: Collect Plugin Verifier Result
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -207,40 +204,54 @@ jobs:
           name: pluginVerifier-result
           path: ${{ github.workspace }}/build/reports/pluginVerifier
 
-  # Prepare a draft release for GitHub Releases page for the manual verification
-  # If accepted and published, the release workflow would be triggered
-  releaseDraft:
-    name: Release draft
-    if: github.event_name != 'pull_request'
-    needs: [ build, test, inspectCode, verify ]
+  # 阶段3: 发布 - 仅在release-please创建了新版本时运行
+  publish-release:
+    name: Publish Release
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    needs: [ release-please, build, test, inspectCode, verify ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-
-      # Check out the current repository
+      # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
 
-      # Remove old release drafts by using the curl request for the available releases with a draft flag
-      - name: Remove Old Release Drafts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api repos/{owner}/{repo}/releases \
-            --jq '.[] | select(.draft == true) | .id' \
-            | xargs -I '{}' gh api -X DELETE repos/{owner}/{repo}/releases/{}
+      # 设置Java环境
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 21
 
-      # Create a new release draft which is not publicly visible and requires manual acceptance
-      - name: Create Release Draft
+      # 构建插件的最终发布版本
+      - name: Build Release Artifact
+        run: ./gradlew buildPlugin
+
+      # 下载之前上传的构建构件
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ICommit-${{ needs.release-please.outputs.tag_name }}
+          path: ./build/distributions
+
+      # 准备发布说明
+      - name: Prepare Release Notes
+        id: prepare_release_notes
+        run: |
+          CHANGELOG_CONTENT="$(cat CHANGELOG.md | grep -A 1000 "## ${{ needs.release-please.outputs.tag_name }}" | grep -B 1000 "## " | head -n -1)"
+          echo "release_notes<<EOF\n${CHANGELOG_CONTENT}\nEOF" >> $GITHUB_OUTPUT
+
+      # 更新GitHub Release，添加构建构件
+      - name: Update Release with Artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(./gradlew properties --property version --quiet --console=plain | tail -n 1 | cut -f2- -d ' ')
-          RELEASE_NOTE="./build/tmp/release_note.txt"
-          ./gradlew getChangelog --unreleased --no-header --quiet --console=plain --output-file=$RELEASE_NOTE
-          
-          gh release create $VERSION \
-            --draft \
-            --title $VERSION \
-            --notes-file $RELEASE_NOTE
+          # 获取所有构建的ZIP文件
+          cd build/distributions
+          ARTIFACTS=(*.zip)
+          # 更新发布，添加构件并取消草稿状态
+          gh release edit ${{ needs.release-please.outputs.tag_name }} \
+            --notes "${{ steps.prepare_release_notes.outputs.release_notes }}" \
+            --draft=false \
+            ${ARTIFACTS[@]/#/--attach=}
