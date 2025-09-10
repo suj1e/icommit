@@ -34,10 +34,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # 使用项目根目录的release-please-config.json配置
 
-  # 阶段2: 构建与测试 - 所有事件都运行
+  # 阶段2: 构建与测试 - 根据事件类型设置不同的依赖关系
   build:
     name: Build
     runs-on: ubuntu-latest
+    # 在main分支推送时依赖于release-please，PR时直接运行
+    needs: ${{ github.event_name == 'pull_request' ? [] : ['release-please'] }}
     steps:
       # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
@@ -46,9 +48,12 @@ jobs:
           tool-cache: false
           large-packages: false
 
-      # 检出当前代码库
+      # 检出当前代码库 - 在main分支推送时需要获取更新后的代码
       - name: Fetch Sources
         uses: actions/checkout@v5
+        with:
+          # 如果是main分支推送且创建了新版本，获取更新后的代码
+          ref: ${{ github.event_name == 'push' && needs.release-please.outputs.release_created == 'true' && github.ref || github.ref }}
 
       # 设置Java环境
       - name: Setup Java
