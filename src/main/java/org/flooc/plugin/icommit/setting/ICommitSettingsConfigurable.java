@@ -7,7 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
 import org.flooc.plugin.icommit.service.AIService;
-import org.flooc.plugin.icommit.service.doubao.DoubaoServiceImpl;
+import org.flooc.plugin.icommit.service.volc.VolcServiceImpl;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,11 +63,11 @@ public class ICommitSettingsConfigurable implements Configurable {
     ICommitSettingsState state = ICommitSettingsState.getInstance();
     component.getApiKey().setText(state.apiKey);
     // 其他值初始化给默认值
-    String[] items = new String[]{AIService.DOUBAO_SERVICE_TYPE};
+    String[] items = new String[]{AIService.VOLC_SERVICE_TYPE};
     component.getServiceType().setModel(new DefaultComboBoxModel<>(items));
-    component.getServiceType().setSelectedItem(AIService.DOUBAO_SERVICE_TYPE);
-    component.getApiUrl().setText(DoubaoServiceImpl.DEFAULT_URL);
-    component.getModel().setText(DoubaoServiceImpl.DEFAULT_MODEL);
+    component.getServiceType().setSelectedItem(AIService.VOLC_SERVICE_TYPE);
+    component.getApiUrl().setText(VolcServiceImpl.DEFAULT_URL);
+    component.getModel().setText(VolcServiceImpl.DEFAULT_MODEL);
     component.getPromptTips().setText(PromptConstant.DEFAULT_PROMPT_TIPS);
   }
 

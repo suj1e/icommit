@@ -1,4 +1,4 @@
-package org.flooc.plugin.icommit.service.doubao;
+package org.flooc.plugin.icommit.service.volc;
 
 import com.intellij.openapi.ui.MessageType;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionContentPart;
@@ -18,11 +18,14 @@ import org.flooc.plugin.icommit.service.AIService;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
 
 /**
- * Implementation of AI service for Doubao API
+ * Implementation of AI service for Volc API
  */
-public class DoubaoServiceImpl implements AIService {
+public class VolcServiceImpl implements AIService {
 
   public static final String DEFAULT_URL = "https://ark.cn-beijing.volces.com/api/v3";
+  /**
+   * 默认使用豆包模型
+   */
   public static final String DEFAULT_MODEL = "doubao-seed-1-6-250615";
 
   private static final ConnectionPool connectionPool = new ConnectionPool(5, 1, TimeUnit.SECONDS);
@@ -34,7 +37,7 @@ public class DoubaoServiceImpl implements AIService {
     String apiUrl = ICommitSettingsState.getInstance().apiUrl;
     String model = ICommitSettingsState.getInstance().model;
     if (apiKey == null || apiKey.isEmpty()) {
-      ICommitNotifications.notify("Doubao API key is empty", MessageType.ERROR);
+      ICommitNotifications.notify("API key is empty", MessageType.ERROR);
       return null;
     }
     if (apiUrl == null || apiUrl.isEmpty()) {
@@ -56,7 +59,7 @@ public class DoubaoServiceImpl implements AIService {
     ChatCompletionRequestStreamOptions streamOptionsForReq =
         new ChatCompletionRequestStreamOptions(false);
     ChatCompletionRequestThinking thinkingForReq = new ChatCompletionRequestThinking(
-        DoubaoThinkingType.AUTO.getValue());
+        VolcThinkingType.DISABLED.getValue());
     boolean stream = true;
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
         .model(model)

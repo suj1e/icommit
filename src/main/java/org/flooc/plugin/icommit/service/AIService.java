@@ -5,7 +5,7 @@ package org.flooc.plugin.icommit.service;
  */
 public interface AIService {
 
-  String DOUBAO_SERVICE_TYPE = "doubao";
+  String VOLC_SERVICE_TYPE = "volc";
 
   /**
    * Generate commit message based on git diff
