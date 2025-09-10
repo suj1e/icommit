@@ -7,7 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
 import org.flooc.plugin.icommit.service.AIService;
-import org.flooc.plugin.icommit.service.DoubaoServiceImpl;
+import org.flooc.plugin.icommit.service.doubao.DoubaoServiceImpl;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 

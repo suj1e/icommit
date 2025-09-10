@@ -2,6 +2,7 @@ package org.flooc.plugin.icommit.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.flooc.plugin.icommit.service.doubao.DoubaoServiceImpl;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
 
 /**

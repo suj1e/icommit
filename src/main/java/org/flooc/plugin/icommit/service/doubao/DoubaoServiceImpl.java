@@ -1,8 +1,10 @@
-package org.flooc.plugin.icommit.service;
+package org.flooc.plugin.icommit.service.doubao;
 
 import com.intellij.openapi.ui.MessageType;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionContentPart;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest;
+import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest.ChatCompletionRequestStreamOptions;
+import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest.ChatCompletionRequestThinking;
 import com.volcengine.ark.runtime.model.completion.chat.ChatMessage;
 import com.volcengine.ark.runtime.model.completion.chat.ChatMessageRole;
 import com.volcengine.ark.runtime.service.ArkService;
@@ -12,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import org.flooc.plugin.icommit.notice.ICommitNotifications;
+import org.flooc.plugin.icommit.service.AIService;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
 
 /**
@@ -49,16 +52,35 @@ public class DoubaoServiceImpl implements AIService {
     final ChatMessage userMessage = ChatMessage.builder().role(ChatMessageRole.USER)
         .multiContent(multiParts).build();
     messages.add(userMessage);
+
+    ChatCompletionRequestStreamOptions streamOptionsForReq =
+        new ChatCompletionRequestStreamOptions(false);
+    ChatCompletionRequestThinking thinkingForReq = new ChatCompletionRequestThinking(
+        DoubaoThinkingType.AUTO.getValue());
+    boolean stream = true;
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
-        // 指定您创建的方舟推理接入点 ID，此处已帮您修改为您的推理接入点 ID
         .model(model)
         .messages(messages)
+        .stream(stream)
+        .streamOptions(streamOptionsForReq)
+        .thinking(thinkingForReq)
         .build();
     // Send request
     StringBuilder sb = new StringBuilder();
-    service.createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
-      sb.append(choice.getMessage().getContent());
-    });
+    if (!stream) {
+      service.createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
+        sb.append(choice.getMessage().getContent());
+      });
+    } else {
+      service.streamChatCompletion(chatCompletionRequest)
+          .doOnError(Throwable::printStackTrace)
+          .blockingForEach(
+              choice -> {
+                if (!choice.getChoices().isEmpty()) {
+                  sb.append(choice.getChoices().getFirst().getMessage().getContent());
+                }
+              });
+    }
     service.shutdownExecutor();
     return sb.toString();
   }
