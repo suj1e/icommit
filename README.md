@@ -1,8 +1,8 @@
 # icommit
 
 ![Build](https://github.com/suj1e/icommit/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/icommit.svg)](https://plugins.jetbrains.com/plugin/icommit)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/icommit.svg)](https://plugins.jetbrains.com/plugin/icommit)
+[![Version](https://img.shields.io/jetbrains/plugin/v/28406-icommit.svg)](https://plugins.jetbrains.com/plugin/28406-icommit)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/28406-icommit.svg)](https://plugins.jetbrains.com/plugin/28406-icommit)
 
 <!-- Plugin description -->
 It is an AI-based code submission tool that automatically generates compliant submissions based on code changes.
