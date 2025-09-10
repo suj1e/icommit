@@ -39,7 +39,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     # 在main分支推送时依赖于release-please，PR时直接运行
-    needs: ${{ github.event_name == 'pull_request' ? [] : ['release-please'] }}
+    needs: ['release-please']
     steps:
       # 释放GitHub Actions环境磁盘空间
       - name: Maximize Build Space
@@ -151,7 +151,7 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.ref }}  
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
           fetch-depth: 0  # 代码检查需要完整的历史记录
 
       # 设置Java环境
