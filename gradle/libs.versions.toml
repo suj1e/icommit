@@ -9,7 +9,7 @@ intelliJPlatform = "2.9.0"
 kotlin = "2.2.0"
 kover = "0.9.1"
 qodana = "2025.2.1"
-volc="0.2.30"
+volc="0.2.31"
 okhttp="5.1.0"
 
 [libraries]
