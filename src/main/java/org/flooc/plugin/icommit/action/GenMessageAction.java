@@ -9,16 +9,12 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vcs.CommitMessageI;
 import com.intellij.openapi.vcs.VcsDataKeys;
-import com.intellij.openapi.vcs.VcsException;
-import com.intellij.openapi.vcs.changes.Change;
 import com.intellij.openapi.vcs.ui.Refreshable;
-import com.intellij.vcs.commit.AbstractCommitWorkflowHandler;
-import java.util.List;
 import org.flooc.plugin.icommit.notice.ICommitNotifications;
-import org.flooc.plugin.icommit.prompt.PromptFormatter;
 import org.flooc.plugin.icommit.service.AIService;
 import org.flooc.plugin.icommit.service.AIServiceExecutor;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
+import org.flooc.plugin.icommit.util.PromptUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +33,8 @@ public class GenMessageAction extends AnAction {
     AIService aiService = new AIServiceExecutor();
     String prompt;
     try {
-      prompt = getPrompt(actionEvent, ICommitSettingsState.getInstance().promptTips);
+      prompt = PromptUtils.getPrompt(actionEvent.getDataContext(),
+          ICommitSettingsState.getInstance().promptTips);
     } catch (Exception e) {
       ICommitNotifications.notify("Failed to generate prompt", MessageType.ERROR);
       return;
@@ -84,26 +81,5 @@ public class GenMessageAction extends AnAction {
     return VcsDataKeys.COMMIT_MESSAGE_CONTROL.getData(e.getDataContext());
   }
 
-  @SuppressWarnings("rawtypes")
-  private String getPrompt(@Nullable AnActionEvent e, String promptTips) throws VcsException {
-    if (e == null) {
-      return null;
-    }
-    Refreshable data = Refreshable.PANEL_KEY.getData(e.getDataContext());
-    if (!(data instanceof CommitMessageI)) {
-      return null;
-    }
-    AbstractCommitWorkflowHandler handler = (AbstractCommitWorkflowHandler) VcsDataKeys.COMMIT_WORKFLOW_HANDLER.getData(
-        e.getDataContext());
-    if (handler != null) {
-      List<Change> includedChanges = handler.getUi().getIncludedChanges();
-      if (includedChanges.isEmpty()) {
-        ICommitNotifications.notify("No changes selected", MessageType.WARNING);
-        return null;
-      }
-      return PromptFormatter.format(includedChanges, promptTips);
-    }
-    return null;
-  }
 
 }
