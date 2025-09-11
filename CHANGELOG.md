@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.2.0](https://github.com/suj1e/icommit/compare/1.1.0...1.2.0) (2025-09-11)
+
+
+### Features
+
+* add deep thinking config and ServiceType enum ([54c5a9c](https://github.com/suj1e/icommit/commit/54c5a9c4b18bebfca6819e46a4348446c15400f2))
+
 ## [1.1.0](https://github.com/suj1e/icommit/compare/1.0.1...1.1.0) (2025-09-09)
 
 
