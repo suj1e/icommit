@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.5.0](https://github.com/suj1e/icommit/compare/1.4.0...1.5.0) (2025-09-11)
+
+
+### Features
+
+* add model ([2edc767](https://github.com/suj1e/icommit/commit/2edc76768485e31278ed502eb15cad5c6def3f86))
+
 ## [1.4.0](https://github.com/suj1e/icommit/compare/1.3.0...1.4.0) (2025-09-11)
 
 
