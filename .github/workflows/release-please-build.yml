@@ -233,7 +233,7 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: ICommit-${{ needs.release-please.outputs.tag_name }}
+          name: icommit-${{ needs.release-please.outputs.tag_name }}
           path: ./build/distributions
 
       # 准备发布说明
