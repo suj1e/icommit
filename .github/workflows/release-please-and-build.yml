@@ -52,8 +52,8 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v5
         with:
-          # 如果是main分支推送且创建了新版本，获取更新后的代码
-          ref: ${{ github.event_name == 'push' && needs.release-please.outputs.release_created == 'true' && github.ref || github.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # 设置Java环境
       - name: Setup Java
@@ -104,6 +104,9 @@ jobs:
       # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # 设置Java环境
       - name: Setup Java
@@ -151,8 +154,8 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.ref }}
-          fetch-depth: 0  # 代码检查需要完整的历史记录
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # 设置Java环境
       - name: Setup Java
@@ -183,6 +186,9 @@ jobs:
       # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # 设置Java环境
       - name: Setup Java
@@ -221,6 +227,9 @@ jobs:
       # 检出当前代码库
       - name: Fetch Sources
         uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
 
       # 设置Java环境
       - name: Setup Java
