@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     # 在main分支推送时依赖于release-please，PR时直接运行
     needs: [ release-please ]
-    # 仅当release-please正式创建release时才执行
+    # release已经创建
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     steps:
       # 释放GitHub Actions环境磁盘空间
