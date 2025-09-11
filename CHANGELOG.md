@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.4.0](https://github.com/suj1e/icommit/compare/1.3.0...1.4.0) (2025-09-11)
+
+
+### Features
+
+* DEFAULT_DISPLAY_NAME ([edaf81b](https://github.com/suj1e/icommit/commit/edaf81b3ecf6de19baaa736a044da72c79a15e47))
+
 ## [1.3.0](https://github.com/suj1e/icommit/compare/1.2.0...1.3.0) (2025-09-11)
 
 
