@@ -1,5 +1,8 @@
 package org.flooc.plugin.icommit.service.volc;
 
+import static org.flooc.plugin.icommit.constant.VolcConstant.*;
+import static org.flooc.plugin.icommit.constant.VolcConstant.DEFAULT_MODEL;
+
 import com.intellij.openapi.ui.MessageType;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionContentPart;
 import com.volcengine.ark.runtime.model.completion.chat.ChatCompletionRequest;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
+import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.notice.ICommitNotifications;
 import org.flooc.plugin.icommit.service.AIService;
 import org.flooc.plugin.icommit.setting.ICommitSettingsState;
@@ -21,11 +25,7 @@ import org.flooc.plugin.icommit.setting.ICommitSettingsState;
  */
 public class VolcServiceImpl implements AIService {
 
-  public static final String DEFAULT_URL = "https://ark.cn-beijing.volces.com/api/v3";
-  /**
-   * 默认使用豆包模型
-   */
-  public static final String DEFAULT_MODEL = "doubao-seed-1-6-250615";
+
 
   private static final ConnectionPool connectionPool = new ConnectionPool(5, 1, TimeUnit.SECONDS);
   private static final Dispatcher dispatcher = new Dispatcher();

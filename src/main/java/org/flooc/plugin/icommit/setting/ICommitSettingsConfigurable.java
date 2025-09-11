@@ -6,6 +6,7 @@ import com.intellij.openapi.util.NlsContexts.ConfigurableName;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
 import org.flooc.plugin.icommit.service.ServiceType;
 import org.flooc.plugin.icommit.service.volc.VolcDeepThinking;
@@ -72,8 +73,8 @@ public class ICommitSettingsConfigurable implements Configurable {
     component.getDeepThinking()
         .setModel(new DefaultComboBoxModel<>(Arrays.stream(VolcDeepThinking.values()).map(
             VolcDeepThinking::getValue).toArray(String[]::new)));
-    component.getApiUrl().setText(VolcServiceImpl.DEFAULT_URL);
-    component.getModel().setText(VolcServiceImpl.DEFAULT_MODEL);
+    component.getApiUrl().setText(VolcConstant.DEFAULT_URL);
+    component.getModel().setText(VolcConstant.DEFAULT_MODEL);
     component.getPromptTips().setText(PromptConstant.DEFAULT_PROMPT_TIPS);
   }
 
