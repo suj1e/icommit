@@ -2,6 +2,14 @@
 
 # ICommit Changelog
 
+## [1.3.0](https://github.com/suj1e/icommit/compare/1.2.0...1.3.0) (2025-09-11)
+
+
+### Features
+
+* **service:** add OPENAI and ALIYUN service types ([bae519c](https://github.com/suj1e/icommit/commit/bae519c6cd5373a7bc5ba96022e76b374426bb09))
+* **volc:** Extract Volc constants to VolcConstant class ([ec57a41](https://github.com/suj1e/icommit/commit/ec57a4155edddb7bbab66369297d07c893ebe759))
+
 ## [1.2.0](https://github.com/suj1e/icommit/compare/1.1.0...1.2.0) (2025-09-11)
 
 
