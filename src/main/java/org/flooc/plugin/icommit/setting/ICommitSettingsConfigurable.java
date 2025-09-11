@@ -20,13 +20,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ICommitSettingsConfigurable implements Configurable {
 
+  private static final String DEFAULT_DISPLAY_NAME = "ICommit";
+
   private ICommitSettingsComponent component;
 
 
   @Nls(capitalization = Nls.Capitalization.Title)
   @Override
   public @ConfigurableName String getDisplayName() {
-    return "ICommit";
+    return DEFAULT_DISPLAY_NAME;
   }
 
 
