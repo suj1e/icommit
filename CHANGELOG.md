@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.7.0](https://github.com/suj1e/icommit/compare/1.6.0...1.7.0) (2025-09-11)
+
+
+### Features
+
+* **constant:** add DEEPSEEK_V3_1_250821 model constant ([0812839](https://github.com/suj1e/icommit/commit/0812839ceb033c0600582e3f241f8c25d2e319d8))
+
 ## [1.6.0](https://github.com/suj1e/icommit/compare/1.5.0...1.6.0) (2025-09-11)
 
 
