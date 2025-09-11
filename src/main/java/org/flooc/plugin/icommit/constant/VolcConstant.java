@@ -13,6 +13,7 @@ public final class VolcConstant {
   public static final String DEFAULT_MODEL = "doubao-seed-1-6-flash-250828";
   public static final String DOUBAO_SEED_1_6_THINKING = "doubao-seed-1-6-thinking-250715";
   public static final String DOUBAO_SEED_1_6_250615 = "doubao-seed-1-6-250615";
+  public static final String DEEPSEEK_V3_1_250821 = "deepseek-v3-1-250821";
 
 
 }
