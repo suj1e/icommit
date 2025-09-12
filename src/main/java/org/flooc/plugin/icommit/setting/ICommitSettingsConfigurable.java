@@ -10,7 +10,6 @@ import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
 import org.flooc.plugin.icommit.service.ServiceType;
 import org.flooc.plugin.icommit.service.volc.VolcDeepThinking;
-import org.flooc.plugin.icommit.service.volc.VolcServiceImpl;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,8 +69,10 @@ public class ICommitSettingsConfigurable implements Configurable {
     ICommitSettingsState state = ICommitSettingsState.getInstance();
     component.getApiKey().setText(state.apiKey);
     // 其他值初始化给默认值
-    String[] serviceTypeItems = new String[]{ServiceType.VOLC.getValue()};
-    component.getServiceType().setModel(new DefaultComboBoxModel<>(serviceTypeItems));
+//    component.getServiceType().setModel(new DefaultComboBoxModel<>(Arrays.stream(ServiceType.values()).map(
+//        ServiceType::getValue).toArray(String[]::new)));
+    component.getServiceType()
+        .setModel(new DefaultComboBoxModel<>(new String[]{ServiceType.VOLC.getValue()}));
     component.getDeepThinking()
         .setModel(new DefaultComboBoxModel<>(Arrays.stream(VolcDeepThinking.values()).map(
             VolcDeepThinking::getValue).toArray(String[]::new)));
