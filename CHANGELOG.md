@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.9.0](https://github.com/suj1e/icommit/compare/1.8.0...1.9.0) (2025-09-12)
+
+
+### Features
+
+* release-please-build.yml ([fa902b3](https://github.com/suj1e/icommit/commit/fa902b3b08e1ba1783bef631de67415a4bbce5e8))
+
 ## [1.8.0](https://github.com/suj1e/icommit/compare/1.7.0...1.8.0) (2025-09-12)
 
 
