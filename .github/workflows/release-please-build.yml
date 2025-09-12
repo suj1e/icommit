@@ -248,8 +248,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 更新发布，添加构件并取消草稿状态
-          gh release upload ${{ needs.release-please.outputs.tag_name }} \
-            --notes "${{ steps.prepare_release_notes.outputs.release_notes }}" \
-            --draft=false \
-            ./build/distributions/*
+          gh release upload ${{ needs.release-please.outputs.tag_name }} ./build/distributions/icommit-${{ needs.release-please.outputs.tag_name }}.zip
