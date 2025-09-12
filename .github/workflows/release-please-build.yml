@@ -241,7 +241,7 @@ jobs:
         id: prepare_release_notes
         run: |
           release_notes="./build/tmp/release_note.txt"
-          ./gradlew getChangelog --targetVersion=${{ needs.release-please.outputs.tag_name }} --no-header --quiet --console=plain --output-file=$release_notes
+          ./gradlew getChangelog --${{ needs.release-please.outputs.tag_name }} --no-header --quiet --console=plain --output-file=$release_notes
 
       # 更新GitHub Release，添加构建构件
       - name: Update Release with Artifacts
