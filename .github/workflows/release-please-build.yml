@@ -4,7 +4,7 @@
 # - 插件验证
 # - 自动发布
 
-name: release-please-build
+name: Release Please Build
 
 on:
   push:
