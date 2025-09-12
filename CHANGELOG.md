@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.8.0](https://github.com/suj1e/icommit/compare/1.7.0...1.8.0) (2025-09-12)
+
+
+### Features
+
+* release-please-build.yml ([837ec61](https://github.com/suj1e/icommit/commit/837ec61cb55b1372f40b41ce4b2c8155c1ca1095))
+
 ## [1.7.0](https://github.com/suj1e/icommit/compare/1.6.0...1.7.0) (2025-09-11)
 
 
