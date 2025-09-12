@@ -2,119 +2,6 @@
 
 # ICommit Changelog
 
-## [1.16.1](https://github.com/suj1e/icommit/compare/1.16.0...1.16.1) (2025-09-12)
-
-
-### Bug Fixes
-
-* update workflow badge name from "Build" to "Release Please" ([be6f3c9](https://github.com/suj1e/icommit/commit/be6f3c9b1a48e6347ceb4cd4db3880833faa1b5a))
-
-## [1.16.0](https://github.com/suj1e/icommit/compare/1.15.0...1.16.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([b1ed0c6](https://github.com/suj1e/icommit/commit/b1ed0c6bb6ce43d8949910117e513919d7f590bc))
-
-## [1.15.0](https://github.com/suj1e/icommit/compare/1.14.0...1.15.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([a958f21](https://github.com/suj1e/icommit/commit/a958f21de27fc6605fa47fe95d45df09a81fad6e))
-
-## [1.14.0](https://github.com/suj1e/icommit/compare/1.13.0...1.14.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([725b3f9](https://github.com/suj1e/icommit/commit/725b3f96c652b5f50637d9ba62266c81ba362928))
-
-## [1.13.0](https://github.com/suj1e/icommit/compare/1.12.0...1.13.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([eb4f677](https://github.com/suj1e/icommit/commit/eb4f677bfcc0c47af6a4c8affb67d78dff5bdea2))
-
-## [1.12.0](https://github.com/suj1e/icommit/compare/1.11.0...1.12.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([128adb1](https://github.com/suj1e/icommit/commit/128adb13aa8f6b75ff15a1ef82a3a84282bc5c2c))
-
-## [1.11.0](https://github.com/suj1e/icommit/compare/1.10.0...1.11.0) (2025-09-12)
-
-
-### Features
-
-* Update release-please-build.yml ([a011500](https://github.com/suj1e/icommit/commit/a0115002f80a6ddb28f4bd503471f55b269606ad))
-
-## [1.10.0](https://github.com/suj1e/icommit/compare/1.9.0...1.10.0) (2025-09-12)
-
-
-### Features
-
-* release-please-build.yml ([462bf17](https://github.com/suj1e/icommit/commit/462bf179b3b975d8793023b0b9a3fcf3b7e9bbad))
-
-## [1.9.0](https://github.com/suj1e/icommit/compare/1.8.0...1.9.0) (2025-09-12)
-
-
-### Features
-
-* release-please-build.yml ([fa902b3](https://github.com/suj1e/icommit/commit/fa902b3b08e1ba1783bef631de67415a4bbce5e8))
-
-## [1.8.0](https://github.com/suj1e/icommit/compare/1.7.0...1.8.0) (2025-09-12)
-
-
-### Features
-
-* release-please-build.yml ([837ec61](https://github.com/suj1e/icommit/commit/837ec61cb55b1372f40b41ce4b2c8155c1ca1095))
-
-## [1.7.0](https://github.com/suj1e/icommit/compare/1.6.0...1.7.0) (2025-09-11)
-
-
-### Features
-
-* **constant:** add DEEPSEEK_V3_1_250821 model constant ([0812839](https://github.com/suj1e/icommit/commit/0812839ceb033c0600582e3f241f8c25d2e319d8))
-
-## [1.6.0](https://github.com/suj1e/icommit/compare/1.5.0...1.6.0) (2025-09-11)
-
-
-### Features
-
-* add model ([cf5f7e3](https://github.com/suj1e/icommit/commit/cf5f7e3f4919896c0133ce7a5f7e397730035433))
-
-## [1.5.0](https://github.com/suj1e/icommit/compare/1.4.0...1.5.0) (2025-09-11)
-
-
-### Features
-
-* add model ([2edc767](https://github.com/suj1e/icommit/commit/2edc76768485e31278ed502eb15cad5c6def3f86))
-
-## [1.4.0](https://github.com/suj1e/icommit/compare/1.3.0...1.4.0) (2025-09-11)
-
-
-### Features
-
-* DEFAULT_DISPLAY_NAME ([edaf81b](https://github.com/suj1e/icommit/commit/edaf81b3ecf6de19baaa736a044da72c79a15e47))
-
-## [1.3.0](https://github.com/suj1e/icommit/compare/1.2.0...1.3.0) (2025-09-11)
-
-
-### Features
-
-* **service:** add OPENAI and ALIYUN service types ([bae519c](https://github.com/suj1e/icommit/commit/bae519c6cd5373a7bc5ba96022e76b374426bb09))
-* **volc:** Extract Volc constants to VolcConstant class ([ec57a41](https://github.com/suj1e/icommit/commit/ec57a4155edddb7bbab66369297d07c893ebe759))
-
-## [1.2.0](https://github.com/suj1e/icommit/compare/1.1.0...1.2.0) (2025-09-11)
-
-
-### Features
-
-* add deep thinking config and ServiceType enum ([54c5a9c](https://github.com/suj1e/icommit/commit/54c5a9c4b18bebfca6819e46a4348446c15400f2))
-
 ## [1.1.0](https://github.com/suj1e/icommit/compare/1.0.1...1.1.0) (2025-09-09)
 
 
@@ -131,11 +18,6 @@
 
 * **settings:** 修正@State注解中name的包路径（settings→setting） ([c1e4030](https://github.com/suj1e/icommit/commit/c1e403089c3b64a794b54a5b77001ce51a00a1b6))
 
-## [1.0.1] - 2025-09-08
-
-### Added
-
-- Add release-please support
 
 ## [1.0.0] - 2025-09-07
 

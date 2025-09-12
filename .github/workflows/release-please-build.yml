@@ -206,8 +206,8 @@ jobs:
           path: ${{ github.workspace }}/build/reports/pluginVerifier
 
   # 阶段3: 发布 - 仅在release-please创建了新版本时运行
-  publish-release:
-    name: Publish Release
+  add-release:
+    name: Add Release
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     needs: [ release-please, build, test, inspectCode, verify ]
     runs-on: ubuntu-latest
