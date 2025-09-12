@@ -241,7 +241,9 @@ jobs:
         id: prepare_release_notes
         run: |
           CHANGELOG_CONTENT="$(cat CHANGELOG.md | grep -A 1000 "## \\[${{ needs.release-please.outputs.tag_name }}\\]" | grep -B 1000 "## " | head -n -1)"
-          printf "release_notes<<'EOF'\n%s\n\nEOF" "$CHANGELOG_CONTENT" >> "$GITHUB_OUTPUT"
+          printf "release_notes<<'EOF'\n" >> "$GITHUB_OUTPUT"
+          printf "%s\n" "$CHANGELOG_CONTENT" >> "$GITHUB_OUTPUT"
+          printf "EOF" >> "$GITHUB_OUTPUT"
 
       # 更新GitHub Release，添加构建构件
       - name: Update Release with Artifacts
