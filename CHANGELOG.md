@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.13.0](https://github.com/suj1e/icommit/compare/1.12.0...1.13.0) (2025-09-12)
+
+
+### Features
+
+* Update release-please-build.yml ([eb4f677](https://github.com/suj1e/icommit/commit/eb4f677bfcc0c47af6a4c8affb67d78dff5bdea2))
+
 ## [1.12.0](https://github.com/suj1e/icommit/compare/1.11.0...1.12.0) (2025-09-12)
 
 
