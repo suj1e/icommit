@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.16.1](https://github.com/suj1e/icommit/compare/1.16.0...1.16.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* update workflow badge name from "Build" to "Release Please" ([be6f3c9](https://github.com/suj1e/icommit/commit/be6f3c9b1a48e6347ceb4cd4db3880833faa1b5a))
+
 ## [1.16.0](https://github.com/suj1e/icommit/compare/1.15.0...1.16.0) (2025-09-12)
 
 
