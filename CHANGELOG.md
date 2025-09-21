@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.2.1](https://github.com/suj1e/icommit/compare/1.2.0...1.2.1) (2025-09-21)
+
+
+### Bug Fixes
+
+* correct workflow_dispatch syntax in publish.yml ([2b2a76d](https://github.com/suj1e/icommit/commit/2b2a76dfa203f3320bc7fcfe20ebcf0f4d9d5d8f))
+
 ## [1.2.0](https://github.com/suj1e/icommit/compare/1.1.0...1.2.0) (2025-09-12)
 
 
