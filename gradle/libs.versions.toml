@@ -10,7 +10,7 @@ kotlin = "2.2.20"
 kover = "0.9.1"
 qodana = "2025.2.1"
 volc="0.2.35"
-okhttp="5.1.0"
+okhttp="5.2.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
