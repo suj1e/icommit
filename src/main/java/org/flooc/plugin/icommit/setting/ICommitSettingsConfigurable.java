@@ -44,7 +44,7 @@ public class ICommitSettingsConfigurable implements Configurable {
 
   @Override
   public boolean isModified() {
-    ICommitSettingsState state = ICommitSettingsState.getInstance();
+    ICommitSettings.State state = ICommitSettings.getInstance().getState();
     return !component.getApiKey().getText().equals(state.apiKey) ||
         !component.getApiUrl().getText().equals(state.apiUrl) ||
         !String.valueOf(component.getServiceType().getSelectedItem()).equals(state.serviceType) ||
@@ -55,7 +55,7 @@ public class ICommitSettingsConfigurable implements Configurable {
 
   @Override
   public void apply() throws ConfigurationException {
-    ICommitSettingsState state = ICommitSettingsState.getInstance();
+    ICommitSettings.State state = ICommitSettings.getInstance().getState();
     state.apiKey = component.getApiKey().getText();
     state.apiUrl = component.getApiUrl().getText();
     state.serviceType = String.valueOf(component.getServiceType().getSelectedItem());
@@ -66,7 +66,7 @@ public class ICommitSettingsConfigurable implements Configurable {
 
   @Override
   public void reset() {
-    ICommitSettingsState state = ICommitSettingsState.getInstance();
+    ICommitSettings.State state = ICommitSettings.getInstance().getState();
     component.getApiKey().setText(state.apiKey);
     // 其他值初始化给默认值
 //    component.getServiceType().setModel(new DefaultComboBoxModel<>(Arrays.stream(ServiceType.values()).map(

@@ -10,10 +10,11 @@ import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vcs.CommitMessageI;
 import com.intellij.openapi.vcs.VcsDataKeys;
 import com.intellij.openapi.vcs.ui.Refreshable;
+import java.util.Objects;
 import org.flooc.plugin.icommit.notice.ICommitNotifications;
 import org.flooc.plugin.icommit.service.AIService;
 import org.flooc.plugin.icommit.service.AIServiceExecutor;
-import org.flooc.plugin.icommit.setting.ICommitSettingsState;
+import org.flooc.plugin.icommit.setting.ICommitSettings;
 import org.flooc.plugin.icommit.util.PromptUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +35,7 @@ public class GenMessageAction extends AnAction {
     String prompt;
     try {
       prompt = PromptUtils.getPrompt(actionEvent.getDataContext(),
-          ICommitSettingsState.getInstance().promptTips);
+          Objects.requireNonNull(ICommitSettings.getInstance().getState()).promptTips);
     } catch (Exception e) {
       ICommitNotifications.notify("Failed to generate prompt", MessageType.ERROR);
       return;

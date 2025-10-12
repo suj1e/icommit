@@ -3,7 +3,7 @@ package org.flooc.plugin.icommit.service;
 import java.util.HashMap;
 import java.util.Map;
 import org.flooc.plugin.icommit.service.volc.VolcServiceImpl;
-import org.flooc.plugin.icommit.setting.ICommitSettingsState;
+import org.flooc.plugin.icommit.setting.ICommitSettings;
 
 /**
  * @author sujie
@@ -19,7 +19,7 @@ public class AIServiceExecutor implements AIService {
 
   @Override
   public String generateCommitMessage(String prompt) throws Exception {
-    String serviceType = ICommitSettingsState.getInstance().serviceType;
+    String serviceType = ICommitSettings.getInstance().getState().serviceType;
     if (serviceType == null || serviceType.trim().isEmpty()
         || AI_SERVICES.get(serviceType) == null) {
       return AI_SERVICES.get(ServiceType.VOLC.getValue())

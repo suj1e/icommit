@@ -15,10 +15,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
-import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.notice.ICommitNotifications;
 import org.flooc.plugin.icommit.service.AIService;
-import org.flooc.plugin.icommit.setting.ICommitSettingsState;
+import org.flooc.plugin.icommit.setting.ICommitSettings;
 
 /**
  * Implementation of AI service for Volc API
@@ -32,10 +31,10 @@ public class VolcServiceImpl implements AIService {
 
   @Override
   public String generateCommitMessage(String prompt) throws Exception {
-    String apiKey = ICommitSettingsState.getInstance().apiKey;
-    String apiUrl = ICommitSettingsState.getInstance().apiUrl;
-    String model = ICommitSettingsState.getInstance().model;
-    String deepThinking = ICommitSettingsState.getInstance().deepThinking;
+    String apiKey = ICommitSettings.getInstance().getState().apiKey;
+    String apiUrl = ICommitSettings.getInstance().getState().apiUrl;
+    String model = ICommitSettings.getInstance().getState().model;
+    String deepThinking = ICommitSettings.getInstance().getState().deepThinking;
     if (apiKey == null || apiKey.isEmpty()) {
       ICommitNotifications.notify("API key is empty", MessageType.ERROR);
       return null;
