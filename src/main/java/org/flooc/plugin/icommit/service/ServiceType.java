@@ -6,7 +6,6 @@ package org.flooc.plugin.icommit.service;
  */
 public enum ServiceType {
   VOLC("volc"),
-  OPENAI("openai"),
   ALIYUN("aliyun"),
   ;
   private final String value;
