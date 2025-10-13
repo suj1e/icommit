@@ -2,6 +2,19 @@
 
 # ICommit Changelog
 
+## [1.3.0](https://github.com/suj1e/icommit/compare/1.2.0...1.3.0) (2025-10-13)
+
+
+### Features
+
+* 调整serviceType ([49768d9](https://github.com/suj1e/icommit/commit/49768d9e2a188c8328e764636cffd731c2d85e0d))
+
+
+### Bug Fixes
+
+* correct workflow_dispatch syntax in publish.yml ([2b2a76d](https://github.com/suj1e/icommit/commit/2b2a76dfa203f3320bc7fcfe20ebcf0f4d9d5d8f))
+* 修复setting ([7a2bf60](https://github.com/suj1e/icommit/commit/7a2bf60a1757e033296ee9393cad10beb81a5ebe))
+
 ## [1.2.0](https://github.com/suj1e/icommit/compare/1.1.0...1.2.0) (2025-09-12)
 
 
