@@ -4,8 +4,12 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.NlsContexts.ConfigurableName;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
 import org.flooc.plugin.icommit.service.ServiceType;
@@ -55,7 +59,7 @@ public class ICommitSettingsConfigurable implements Configurable {
 
   @Override
   public void apply() throws ConfigurationException {
-    ICommitSettings.State state = ICommitSettings.getInstance().getState();
+    ICommitSettings.State state = Objects.requireNonNull(ICommitSettings.getInstance().getState());
     state.apiKey = component.getApiKey().getText();
     state.apiUrl = component.getApiUrl().getText();
     state.serviceType = String.valueOf(component.getServiceType().getSelectedItem());
@@ -66,19 +70,47 @@ public class ICommitSettingsConfigurable implements Configurable {
 
   @Override
   public void reset() {
-    ICommitSettings.State state = ICommitSettings.getInstance().getState();
+    ICommitSettings.State state = Objects.requireNonNull(ICommitSettings.getInstance().getState());
     component.getApiKey().setText(state.apiKey);
-    // 其他值初始化给默认值
-//    component.getServiceType().setModel(new DefaultComboBoxModel<>(Arrays.stream(ServiceType.values()).map(
-//        ServiceType::getValue).toArray(String[]::new)));
+    String[] serviceTypes = new String[ServiceType.values().length];
+    if (StringUtils.isNotEmpty(state.serviceType)) {
+      serviceTypes[0] = state.serviceType;
+      List<ServiceType> serviceTypeList = Arrays.stream(ServiceType.values())
+          .filter(j -> !j.getValue().equals(state.serviceType)).toList();
+      if (!CollectionUtils.isEmpty(serviceTypeList)) {
+        for (int i = 0; i < serviceTypeList.size(); i++) {
+          serviceTypes[i + 1] = serviceTypeList.get(i).getValue();
+        }
+      }
+    } else {
+      serviceTypes = Arrays.stream(ServiceType.values()).map(ServiceType::getValue)
+          .toArray(String[]::new);
+    }
     component.getServiceType()
-        .setModel(new DefaultComboBoxModel<>(new String[]{ServiceType.VOLC.getValue()}));
+        .setModel(new DefaultComboBoxModel<>(serviceTypes));
+
+    String[] deepThinking = new String[VolcDeepThinking.values().length];
+    if (StringUtils.isNotEmpty(state.deepThinking)) {
+      deepThinking[0] = state.deepThinking;
+      List<VolcDeepThinking> deepThinkingList = Arrays.stream(VolcDeepThinking.values())
+          .filter(j -> !j.getValue().equals(state.deepThinking)).toList();
+      if (!CollectionUtils.isEmpty(deepThinkingList)) {
+        for (int i = 0; i < deepThinkingList.size(); i++) {
+          deepThinking[i + 1] = deepThinkingList.get(i).getValue();
+        }
+      }
+    } else {
+      deepThinking = Arrays.stream(VolcDeepThinking.values()).map(VolcDeepThinking::getValue)
+          .toArray(String[]::new);
+    }
     component.getDeepThinking()
-        .setModel(new DefaultComboBoxModel<>(Arrays.stream(VolcDeepThinking.values()).map(
-            VolcDeepThinking::getValue).toArray(String[]::new)));
-    component.getApiUrl().setText(VolcConstant.DEFAULT_URL);
-    component.getModel().setText(VolcConstant.DEFAULT_MODEL);
-    component.getPromptTips().setText(PromptConstant.DEFAULT_PROMPT_TIPS);
+        .setModel(new DefaultComboBoxModel<>(deepThinking));
+    component.getApiUrl()
+        .setText(StringUtils.defaultIfEmpty(state.apiUrl, VolcConstant.DEFAULT_URL));
+    component.getModel()
+        .setText(StringUtils.defaultIfEmpty(state.model, VolcConstant.DEFAULT_MODEL));
+    component.getPromptTips()
+        .setText(StringUtils.defaultIfEmpty(state.promptTips, PromptConstant.DEFAULT_PROMPT_TIPS));
   }
 
   @Override
