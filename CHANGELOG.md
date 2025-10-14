@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.4.0](https://github.com/suj1e/icommit/compare/1.3.0...1.4.0) (2025-10-14)
+
+
+### Features
+
+* 调整枚举 ([6ade608](https://github.com/suj1e/icommit/commit/6ade608ed7f587a6584d8182b4159992fddc7a0d))
+
 ## [1.3.0](https://github.com/suj1e/icommit/compare/1.2.0...1.3.0) (2025-10-13)
 
 
