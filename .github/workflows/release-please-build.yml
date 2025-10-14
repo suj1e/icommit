@@ -63,7 +63,7 @@ jobs:
 
       # 设置Gradle
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
 
       # 构建插件
       - name: Build plugin
@@ -113,7 +113,7 @@ jobs:
 
       # 设置Gradle
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           cache-read-only: true
 
@@ -189,7 +189,7 @@ jobs:
 
       # 设置Gradle
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           cache-read-only: true
 
