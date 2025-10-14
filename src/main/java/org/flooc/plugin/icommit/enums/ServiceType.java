@@ -1,4 +1,4 @@
-package org.flooc.plugin.icommit.service;
+package org.flooc.plugin.icommit.enums;
 
 /**
  * @author sujie

@@ -12,8 +12,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.flooc.plugin.icommit.constant.VolcConstant;
 import org.flooc.plugin.icommit.prompt.PromptConstant;
-import org.flooc.plugin.icommit.service.ServiceType;
-import org.flooc.plugin.icommit.service.volc.VolcDeepThinking;
+import org.flooc.plugin.icommit.enums.ServiceType;
+import org.flooc.plugin.icommit.enums.VolcDeepThinking;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
