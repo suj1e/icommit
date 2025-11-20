@@ -52,7 +52,7 @@ jobs:
 
       # 检出当前代码库 - 在main分支推送时需要获取更新后的代码
       - name: Fetch Sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 设置Java环境
       - name: Setup Java
@@ -102,7 +102,7 @@ jobs:
 
       # 检出当前代码库
       - name: Fetch Sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 设置Java环境
       - name: Setup Java
@@ -148,7 +148,7 @@ jobs:
 
       # 检出当前代码库
       - name: Fetch Sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 设置Java环境
       - name: Setup Java
@@ -178,7 +178,7 @@ jobs:
 
       # 检出当前代码库
       - name: Fetch Sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 设置Java环境
       - name: Setup Java
@@ -216,7 +216,7 @@ jobs:
     steps:
       # 检出当前代码库
       - name: Fetch Sources
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       # 设置Java环境
       - name: Setup Java
