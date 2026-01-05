@@ -2,6 +2,13 @@
 
 # ICommit Changelog
 
+## [1.5.0](https://github.com/suj1e/icommit/compare/1.4.0...1.5.0) (2026-01-05)
+
+
+### Features
+
+* workflow ([2f341f3](https://github.com/suj1e/icommit/commit/2f341f375eff15591d1a1107c0b7ec1af3ae8809))
+
 ## [1.4.0](https://github.com/suj1e/icommit/compare/1.3.0...1.4.0) (2025-10-14)
 
 
