@@ -26,6 +26,7 @@ repositories {
     // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
     intellijPlatform {
         defaultRepositories()
+        localPlatformArtifacts()
     }
 }
 
@@ -107,7 +108,7 @@ intellijPlatform {
 
     pluginVerification {
         ides {
-            recommended()
+            create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
         }
     }
 }
